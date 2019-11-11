@@ -15,6 +15,9 @@ def _json_load(filename):
         print("Failed to load json '{}', returning empty list...".format(filename))
         return []
 
+def _infer_classname(obj):
+    return obj.__class__.__name__.lower() + 's'
+
 def load(classname):
     filename = 'database/{}.json'.format(classname)
     if not os.path.exists(filename):
@@ -40,7 +43,11 @@ def commit(data, classname):
 # data = list of objs of that class
 #   normally obtained thru a 'load' call with 
 #   appropriate classname
-def append(obj, data, classname):
+# if classname is not specified, it will be inferred
+def append(obj, data, classname=None):
+    if classname is None:
+        classname = _infer_classname(obj)
+        
     is_unique = True
     for item in data:
         if item == obj:
@@ -57,7 +64,11 @@ def append(obj, data, classname):
 # data = list of objs of that class
 #   normally obtained thru a 'load' call with 
 #   appropriate classname
-def update(obj, data, classname):
+# if classname is not specified, it will be inferred
+def update(obj, data, classname=None):
+    if classname is None:
+        classname = _infer_classname(obj)
+
     has_update = False
     for index, item in enumerate(data):
         if item == obj:

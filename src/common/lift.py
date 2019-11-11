@@ -1,6 +1,6 @@
 from .base_class import BaseClass
 
-class Ride(BaseClass):
+class Lift(BaseClass):
     def __init__(self, code, city_origin, state_origin, city_destination, state_destination, date, duration, vacancies, price):
         self.code = code
         self.city_origin = city_origin
