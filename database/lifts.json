@@ -1,1 +1,1 @@
-[{"city_destination": "RJ", "date": "2019-11-10 21:28:04.484683", "state_destination": "RJ", "price": 159.9, "code": 1, "duration": "60", "city_origin": "BSB", "vacancies": 4, "state_origin": "DF"}]
+[{"code": 1, "price": 159.9, "city_origin": "BSB", "state_destination": "RJ", "city_destination": "RJ", "vacancies": 4, "date": "2019-11-10 22:12:14.457370", "duration": "60", "state_origin": "DF"}]
