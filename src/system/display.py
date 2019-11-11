@@ -1,28 +1,31 @@
 
-def request_main_menu_choice():
-    options = [
-        'Show all users',
-        'Show all accounts',
-        'Show all lifts',
-        'Show all reservations',
-    ]
-    return request_choice(options)
+def process_menu_choice(menu):
+    keys = sorted(menu.keys())
+    choice = request_choice(keys)
+    if choice:
+        menu[keys[choice - 1]]() 
+
+    return choice
 
 def request_choice(options):
     mi = 1
     ma = len(options)
-    print('Please choose one of the following:')
-    print('  0. Return')
+    print('Por favor, escolha uma opção:')
+    print('  0. Parar')
     for index, option in enumerate(options):
         print('  {}. {}'.format(index + 1, option))
 
-    choice = int(input('Your choice: '))
+    choice = int(input('Escolha: '))
     while choice < mi or choice > ma:
         if choice == 0:
             return choice
-        choice = int(input('Invalid choice. Try again: '))
+        choice = int(input('Escolha inválida. Tente novamente: '))
     print()
     return choice 
+
+def request_login():
+    print('Entre com seu CPF e sua senha.')
+    return input('  CPF: '), input('  Senha: ')
 
 def _print_list(l, title=''):
     print(title)

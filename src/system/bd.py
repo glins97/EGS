@@ -18,6 +18,13 @@ def _json_load(filename):
 def _infer_classname(obj):
     return obj.__class__.__name__.lower() + 's'
 
+def auth(cpf, password, data):
+    cpf = cpf.replace('-', '').replace('.', '')
+    for user in data:
+        if user['cpf'].replace('-', '').replace('.', '') == cpf and user['password'] == password:
+            return True
+    return False  
+
 def load(classname):
     filename = 'database/{}.json'.format(classname)
     if not os.path.exists(filename):
