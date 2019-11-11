@@ -17,3 +17,6 @@ print(ride.serialyze())
 
 user2 = User('111.111.111-11', 'Gabriel', '(61) 99964-0993', 'gabriel.lins97@gmail.com', '1234')
 print(user == user2)
+
+users = bd.load('users')
+bd.append(user, users, 'users')

@@ -10,7 +10,7 @@ class BaseClass(object):
         for attr in dir(self):
             if '__' not in attr[:2] and '__' not in attr[-2:] and type(getattr(self, attr)) != types.MethodType:
                 res[attr] = getattr(self, attr)
-        return json.dumps(res)
+        return res
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
