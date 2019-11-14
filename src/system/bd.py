@@ -40,7 +40,7 @@ def commit(data, classname):
             print("'{}' does not exist...".format(classname))
             return False
         with open(filename, 'w') as f:
-            f.write(json.dumps(data, cls=Encoder))
+            f.write(json.dumps(data, cls=Encoder, indent=4))
         return True
     except:
         print("Commit with data='{}' classname='{}' has failed...".format(data, classname))

@@ -1,1 +1,26 @@
-[{"name": "Gabriel", "telephone": "(61) 99964-0993", "password": "1234", "cpf": "111.111.111-11", "access_level": "admin", "email": "gabriel.lins97@gmail.com"}, {"name": "teste", "telephone": "", "access_level": "user", "email": "", "password": "", "cpf": ""}]
+[
+    {
+        "name": "Gabriel",
+        "access_level": "admin",
+        "telephone": "(61) 99964-0993",
+        "cpf": "111.111.111-11",
+        "password": "1234",
+        "email": "gabriel.lins97@gmail.com"
+    },
+    {
+        "name": "teste",
+        "access_level": "user",
+        "telephone": "",
+        "cpf": "",
+        "password": "",
+        "email": ""
+    },
+    {
+        "name": "amoeba",
+        "access_level": "user",
+        "telephone": "",
+        "cpf": "",
+        "password": "",
+        "email": ""
+    }
+]
