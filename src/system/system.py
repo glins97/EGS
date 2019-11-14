@@ -1,4 +1,6 @@
 from src.system import bd, display
+import time
+import os
 
 CHOICE_QUIT = 0
 STATE_NOT_AUTHED = 0
@@ -31,23 +33,36 @@ class System(object):
         menus = {
             STATE_NOT_AUTHED: {
                 'Mostrar caronas disponíveis': lambda: display._print_list(self.tables['lifts'], 'Caronas disponíveis:'),
-                'Pesquisar carona disponível': lambda: print('SYSTEM::SEARCH AVAILABLE LIFTS'),
+                'Pesquisar carona disponível': lambda: display._print_list(
+                    bd.select(
+                        display.request_search_details(['city_origin', 'state_origin', 'city_destination', 'state_destination']), self.tables['lifts']
+                    ),
+                    'Caronas encontradas:'
+                ),
                 'Login': self.do_login,
             },
+
             STATE_AUTHED: {
             },
-
+        
         }
 
         return menus[self.state]
 
 
     def run(self):
+        os.system('clear')
         if self.tables == {}:
             self.load()
 
         choice = 1
         while choice != CHOICE_QUIT:
-            choice = display.process_menu_choice(
-                self.request_state_menu()
-            )
+            try:
+                choice = display.process_menu_choice(
+                    self.request_state_menu()
+                )
+                input("Pressione [ENTER] para continuar")
+                os.system('clear')
+            except:
+                os.system('clear')
+                continue

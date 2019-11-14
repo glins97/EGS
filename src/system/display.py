@@ -1,3 +1,8 @@
+def request_search_details(attrs):
+    response = {}
+    for attr in attrs:
+        response[attr] = input('Valor para {}: '.format(attr))
+    return response
 
 def process_menu_choice(menu):
     keys = sorted(menu.keys())
@@ -31,4 +36,6 @@ def _print_list(l, title=''):
     print(title)
     for index, item in enumerate(l):
         print('  {}. {}'.format(index + 1, item))
+    if len(l) == 0:
+        print("  Sem resultados.")
     print()

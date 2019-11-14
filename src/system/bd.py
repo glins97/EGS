@@ -86,3 +86,17 @@ def update(obj, data, classname=None):
         commit(data, classname)
     else:
         print('Cannot update database: no object matches specified private key')
+
+# attrs = dict of attributes that must match
+# data = table data 
+def select(attrs, data):
+    target = len(attrs)
+    matches = 0
+    results = []
+    for item in data:
+        for attr in attrs:
+            if item[attr] == attrs[attr] or attrs[attr] == '':
+                matches += 1
+        if matches == target:
+            results.append(item)
+    return results
