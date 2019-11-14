@@ -1,4 +1,4 @@
-def request_search_details(attrs):
+def request_details(attrs):
     response = {}
     for attr in attrs:
         response[attr] = input('Valor para {}: '.format(attr))

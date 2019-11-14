@@ -1,1 +1,1 @@
-[{"name": "Gabriel", "telephone": "(61) 99964-0993", "cpf": "111.111.111-11", "password": "1234", "email": "gabriel.lins97@gmail.com", "access_level": "admin"}]
+[{"name": "Gabriel", "telephone": "(61) 99964-0993", "password": "1234", "cpf": "111.111.111-11", "access_level": "admin", "email": "gabriel.lins97@gmail.com"}, {"name": "teste", "telephone": "", "access_level": "user", "email": "", "password": "", "cpf": ""}]

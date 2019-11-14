@@ -29,17 +29,24 @@ class System(object):
             else:
                 print('Login mal sucedido.\n')
 
+    def do_register(self):
+        obj = dict({'access_level': 'user'}, **display.request_details(['name', 'telephone', 'cpf', 'password', 'email']))
+        bd.append(
+            obj, self.tables['users'], 'users'
+        )
+
     def request_state_menu(self):
         menus = {
             STATE_NOT_AUTHED: {
                 'Mostrar caronas disponíveis': lambda: display._print_list(self.tables['lifts'], 'Caronas disponíveis:'),
                 'Pesquisar carona disponível': lambda: display._print_list(
                     bd.select(
-                        display.request_search_details(['city_origin', 'state_origin', 'city_destination', 'state_destination']), self.tables['lifts']
+                        display.request_details(['city_origin', 'state_origin', 'city_destination', 'state_destination']), self.tables['lifts']
                     ),
                     'Caronas encontradas:'
                 ),
                 'Login': self.do_login,
+                'Cadastrar': self.do_register,
             },
 
             STATE_AUTHED: {
@@ -61,8 +68,9 @@ class System(object):
                 choice = display.process_menu_choice(
                     self.request_state_menu()
                 )
-                input("Pressione [ENTER] para continuar")
-                os.system('clear')
+                if choice != 0:
+                    input("Pressione [ENTER] para continuar")
+                    os.system('clear')
             except:
                 os.system('clear')
                 continue
