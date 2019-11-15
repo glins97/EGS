@@ -21,7 +21,7 @@ def _infer_classname(obj):
 def auth(cpf, password, data):
     cpf = cpf.replace('-', '').replace('.', '')
     for user in data:
-        if user['cpf'].replace('-', '').replace('.', '') == cpf and user['password'] == password:
+        if user['user_cpf'].replace('-', '').replace('.', '') == cpf and user['password'] == password:
             return True
     return False  
 

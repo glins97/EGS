@@ -12,6 +12,7 @@ class System(object):
     def __init__(self):
         self.tables = {}
         self.authed = False
+        self.authed_user = None
         self.state = STATE_NOT_AUTHED 
 
     def load(self):
@@ -21,9 +22,12 @@ class System(object):
     def do_login(self):
         retries = 3
         for _ in range(retries):
-            self.authed = bd.auth(*display.request_login(), self.tables['users'])
+            user, pw = display.request_login()
+            print('user', user, 'pw', pw)
+            self.authed = bd.auth(user, pw, self.tables['users'])
             if self.authed:
                 self.state = STATE_AUTHED
+                self.authed_user = user
                 print('Login bem sucedido.\n')
                 break
             else:
@@ -34,12 +38,28 @@ class System(object):
         bd.append(
             obj, self.tables['users'], 'users'
         )
+    
+    def do_unregister(self):
+        user_lifts = bd.select({'user_cpf': self.authed_user}, self.tables['lifts'])
+        user_reservations = bd.select({'user_cpf': self.authed_user}, self.tables['reservations'])
+        if len(user_lifts) == 0 and len(user_reservations) == 0:
+            self.state = STATE_NOT_AUTHED
+            self.authed = False
+            self.authed_user = None
+            print('Descadastro concluído.')
+            return True
+        elif (len(user_lifts)):
+            print('Falha ao descadastrar: usuário possui {} caronas'.format(len(user_lifts)))
+        elif (len(user_reservations)):
+            print('Falha ao descadastrar: usuário possui {} reservas'.format(len(user_reservations)))
+
+        return False
 
     def request_state_menu(self):
         menus = {
             STATE_NOT_AUTHED: {
-                'Mostrar caronas disponíveis': lambda: display._print_list(self.tables['lifts'], 'Caronas disponíveis:'),
-                'Pesquisar carona disponível': lambda: display._print_list(
+                'Mostrar caronas': lambda: display._print_list(self.tables['lifts'], 'Caronas disponíveis:'),
+                'Pesquisar carona': lambda: display._print_list(
                     bd.select(
                         display.request_details(['city_origin', 'state_origin', 'city_destination', 'state_destination']), self.tables['lifts']
                     ),
@@ -50,6 +70,18 @@ class System(object):
             },
 
             STATE_AUTHED: {
+                'Descadastrar': self.do_unregister,
+                'Mostrar caronas': lambda: display._print_list(self.tables['lifts'], 'Caronas disponíveis:'),
+                'Pesquisar carona': lambda: display._print_list(
+                    bd.select(
+                        display.request_details(['city_origin', 'state_origin', 'city_destination', 'state_destination']), self.tables['lifts']
+                    ),
+                    'Caronas encontradas:'
+                ),
+                'Registrar carona': lambda: print('@RegistrarCarona'),
+                'Retirar carona': lambda: print('@RetirarCarona'),
+                'Registrar reserva': lambda: print('@RegistrarReserva'),
+                'Retirar reserva': lambda: print('@RetirarReserva'),
             },
         
         }
@@ -71,6 +103,6 @@ class System(object):
                 if choice != 0:
                     input("Pressione [ENTER] para continuar")
                     os.system('clear')
-            except:
-                os.system('clear')
+            except Exception as e:
+                print(repr(e))
                 continue
