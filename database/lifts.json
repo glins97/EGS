@@ -1,25 +1,14 @@
 [
     {
-        "city_origin": "BSB",
-        "lift_code": 1,
-        "vacancies": 4,
-        "price": 159.9,
-        "duration": 60,
         "city_destination": "RJ",
-        "state_origin": "DF",
-        "date": "2019-11-15 16:59:59.864809",
-        "state_destination": "RJ",
-        "user_cpf": "111.111.111-11"
-    },
-    {
-        "city_destination": "SP",
-        "lift_code": 2,
-        "state_origin": "DF",
-        "city_origin": "BSBS",
+        "date": "2019-11-15 17:13:48.942927",
         "vacancies": 4,
-        "price": 160.0,
+        "lift_code": 1,
+        "user_cpf": "admin",
+        "state_destination": "RJ",
         "duration": 60,
-        "state_destination": "SP",
-        "user_cpf": "lublinde"
+        "city_origin": "BSB",
+        "state_origin": "DF",
+        "price": 159.9
     }
 ]

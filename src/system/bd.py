@@ -90,13 +90,14 @@ def update(obj, data, classname=None):
 # attrs = dict of attributes that must match
 # data = table data 
 def select(attrs, data):
-    target = len(attrs)
-    matches = 0
+    attr_matches_target = len(attrs)
+    attr_matches = 0
     results = []
     for item in data:
         for attr in attrs:
             if item[attr] == attrs[attr] or attrs[attr] == '':
-                matches += 1
-        if matches == target:
+                attr_matches += 1
+        if attr_matches == attr_matches_target:
             results.append(item)
+            attr_matches = 0
     return results

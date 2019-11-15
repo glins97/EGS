@@ -1,18 +1,18 @@
 [
     {
-        "password": "1234",
-        "telephone": "(61) 99964-0993",
-        "access_level": "admin",
+        "email": "gabriel.lins97@gmail.com",
         "name": "Gabriel",
-        "user_cpf": "111.111.111-11",
-        "email": "gabriel.lins97@gmail.com"
+        "access_level": "admin",
+        "user_cpf": "admin",
+        "password": "",
+        "telephone": "(61) 99964-0993"
     },
     {
-        "password": "",
-        "telephone": "(61) 99964-0993",
-        "access_level": "user",
+        "email": "",
         "name": "Luisa",
-        "user_cpf": "lublinde",
-        "email": ""
+        "access_level": "user",
+        "user_cpf": "user",
+        "password": "",
+        "telephone": "(61) 99964-0993"
     }
 ]

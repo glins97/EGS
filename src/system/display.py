@@ -12,10 +12,10 @@ def process_menu_choice(menu):
 
     return choice
 
-def request_choice(options):
+def request_choice(options, title='Por favor, escolha uma opção:'):
     mi = 1
     ma = len(options)
-    print('Por favor, escolha uma opção:')
+    print(title)
     print('  0. Parar')
     for index, option in enumerate(options):
         print('  {}. {}'.format(index + 1, option))

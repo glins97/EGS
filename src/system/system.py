@@ -48,6 +48,10 @@ class System(object):
             self.state = STATE_NOT_AUTHED
             self.authed = False
             self.authed_user = None
+            for user in self.tables['users']:
+                if user['cpf'] == self.authed_user:
+                    self.tables['users'].remove(user)
+
             print('Descadastro concluído.')
             return True
         elif (len(user_lifts)):
@@ -76,6 +80,25 @@ class System(object):
             dict({'user_cpf': self.authed_user}, **details), self.tables['lifts'], 'lifts'
         )
 
+    def do_remove_lift(self):
+        user_lifts = bd.select({'user_cpf': self.authed_user}, self.tables['lifts'])
+        if len(user_lifts) == 0:
+            print("Sem caronas cadastradas pelo usuário.")
+        
+        lift_index = display.request_choice(user_lifts, title='Escolha uma carona para desregistrar:')
+        if not lift_index:
+            return False
+        lift = user_lifts[lift_index - 1]
+
+        reservations = bd.select({'lift_code': lift['lift_code']}, self.tables['reservations'])
+        if len(reservations) > 0:
+            print("Carona já tem passageiro, não pode ser removida.")
+            return False
+
+        self.tables['lifts'].remove(lift)
+        bd.commit(self.tables['lifts'], 'lifts')
+        return True
+
     def request_state_menu(self):
         menus = {
             STATE_NOT_AUTHED: {
@@ -100,7 +123,7 @@ class System(object):
                     'Caronas encontradas:'
                 ),
                 'Registrar carona': self.do_add_lift,
-                'Retirar carona': lambda: print('@RetirarCarona'),
+                'Retirar carona': self.do_remove_lift,
                 'Registrar reserva': lambda: print('@RegistrarReserva'),
                 'Retirar reserva': lambda: print('@RetirarReserva'),
             },
