@@ -1,9 +1,9 @@
 [
     {
         "lift_code": 1,
-        "bagage": false,
         "reservation_code": 1,
-        "user_cpf": "lublinde",
-        "seat": "Front2"
+        "bagage": false,
+        "seat": "Front2",
+        "user_cpf": "lublinde"
     }
 ]

@@ -1,6 +1,8 @@
 from .base_class import BaseClass
 
 class Lift(BaseClass):
+    pks = ['lift_code']
+    
     def __init__(self, lift_code, user_cpf, city_origin, state_origin, city_destination, state_destination, date, duration, vacancies, price):
         self.lift_code = lift_code
         self.user_cpf = user_cpf

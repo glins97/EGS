@@ -1,12 +1,14 @@
 from src.system import bd, display
+from src.common.account import Account
+from src.common.user import User
+from src.common.lift import Lift
+from src.common.reservation import Reservation
 import time
 import os
 
 CHOICE_QUIT = 0
 STATE_NOT_AUTHED = 0
 STATE_AUTHED = 1
-
-
 
 class System(object):
     def __init__(self):
@@ -55,6 +57,25 @@ class System(object):
 
         return False
 
+    def do_add_lift(self):
+        details = display.request_details([
+                'city_origin',
+                'state_origin',
+                'city_destination',
+                'state_destination',
+                'duration',
+                'vacancies',
+                'price',            
+            ])
+        details['price'] = float(details['price'])
+        details['vacancies'] = int(details['vacancies'])
+        details['duration'] = int(details['duration'])
+        details[Lift.pks[0]] = self.tables['lifts'][-1][Lift.pks[0]] + 1
+        
+        bd.append(
+            dict({'user_cpf': self.authed_user}, **details), self.tables['lifts'], 'lifts'
+        )
+
     def request_state_menu(self):
         menus = {
             STATE_NOT_AUTHED: {
@@ -78,7 +99,7 @@ class System(object):
                     ),
                     'Caronas encontradas:'
                 ),
-                'Registrar carona': lambda: print('@RegistrarCarona'),
+                'Registrar carona': self.do_add_lift,
                 'Retirar carona': lambda: print('@RetirarCarona'),
                 'Registrar reserva': lambda: print('@RegistrarReserva'),
                 'Retirar reserva': lambda: print('@RetirarReserva'),
