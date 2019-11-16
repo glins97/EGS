@@ -124,7 +124,12 @@ class System(object):
 
         lift = available_lifts[choice - 1]
         lift_reservations = bd.select({'lift_code': lift['lift_code']}, self.tables['reservations'])
-        display._print_list(lift_reservations, 'Reservas cadastradas: ')
+        users_and_reservations = []
+        for reservation in lift_reservations:
+            user = bd.select({'user_cpf': reservation['user_cpf']}, self.tables['users'])[0]
+            reservation = dict(user, **reservation)
+            users_and_reservations.append(reservation)
+        display._print_list(users_and_reservations, 'Reservas cadastradas: ')
 
     def request_state_menu(self):
         menus = {

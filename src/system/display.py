@@ -1,4 +1,5 @@
 from src.system import bd
+import json
 translations = bd.load('translations')
 
 def request_details(attrs):
