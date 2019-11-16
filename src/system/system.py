@@ -100,12 +100,12 @@ class System(object):
         return True
 
     def do_register_reservation(self):
-        available_lifts = [lift for lift in self.tables['lifts'] if lift['vacancies'] > 0]
-        choice = display.request_choice(available_lifts, "Escolha uma das caronas abaixo:")
+        user_lifts = bd.select({'user_cpf': self.authed_user}, self.tables['lifts'])
+        choice = display.request_choice(user_lifts, "Escolha uma das caronas abaixo:")
         
         details = display.request_details(['assento', 'bagage'])
         details['bagage'] = True if details['bagage'].lower() == "sim" else False
-        details['lift_code'] = available_lifts[choice - 1]['lift_code']
+        details['lift_code'] = user_lifts[choice - 1]['lift_code']
         details['user_cpf'] = self.authed_user
         details[Reservation.pks[0]] = self.tables['reservations'][-1][Reservation.pks[0]] + 1
         
@@ -117,6 +117,14 @@ class System(object):
 
         self.tables['reservations'].remove(user_reservations[reservation_index - 1])
         bd.commit(self.tables['reservations'], 'reservations')
+
+    def check_lift_reservations(self):
+        available_lifts = [lift for lift in self.tables['lifts'] if lift['vacancies'] > 0]
+        choice = display.request_choice(available_lifts, "Escolha uma das caronas abaixo:")
+
+        lift = available_lifts[choice - 1]
+        lift_reservations = bd.select({'lift_code': lift['lift_code']}, self.tables['reservations'])
+        display._print_list(lift_reservations, 'Reservas cadastradas: ')
 
     def request_state_menu(self):
         menus = {
@@ -145,6 +153,7 @@ class System(object):
                 'Retirar carona': self.do_remove_lift,
                 'Registrar reserva': self.do_register_reservation,
                 'Retirar reserva': self.do_unregister_reservation,
+                'Ver reservas para caronas': self.check_lift_reservations,
             },
         
         }
