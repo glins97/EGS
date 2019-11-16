@@ -1,14 +1,14 @@
 [
     {
-        "number": 141516,
         "agency": "1111-1x",
+        "bank": "BRB",
         "user_cpf": "admin",
-        "bank": "BRB"
+        "number": 141516
     },
     {
-        "number": 171819,
         "agency": "1111-2x",
+        "bank": "BRB",
         "user_cpf": "admin",
-        "bank": "BRB"
+        "number": 171819
     }
 ]

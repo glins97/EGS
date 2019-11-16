@@ -1,9 +1,16 @@
 [
     {
-        "user_cpf": "user",
-        "reservation_code": 1,
         "seat": "Front2",
         "bagage": false,
+        "reservation_code": 1,
+        "user_cpf": "user",
         "lift_code": 1
+    },
+    {
+        "reservation_code": 2,
+        "bagage": true,
+        "lift_code": 1,
+        "user_cpf": "admin",
+        "assento": "Back"
     }
 ]

@@ -99,10 +99,22 @@ class System(object):
         bd.commit(self.tables['lifts'], 'lifts')
         return True
 
+    def do_register_reservation(self):
+        available_lifts = [lift for lift in self.tables['lifts'] if lift['vacancies'] > 0]
+        choice = display.request_choice(available_lifts, "Escolha uma das caronas abaixo:")
+        
+        details = display.request_details(['assento', 'bagage'])
+        details['bagage'] = True if details['bagage'].lower() == "sim" else False
+        details['lift_code'] = available_lifts[choice - 1]['lift_code']
+        details['user_cpf'] = self.authed_user
+        details[Reservation.pks[0]] = self.tables['reservations'][-1][Reservation.pks[0]] + 1
+        
+        bd.append(details, self.tables['reservations'], 'reservations')
+
     def request_state_menu(self):
         menus = {
             STATE_NOT_AUTHED: {
-                'Mostrar caronas': lambda: display._print_list(self.tables['lifts'], 'Caronas disponíveis:'),
+                'Mostrar caronas': lambda: display._print_list(self.tables['lifts'], 'Caronas registradas:'),
                 'Pesquisar carona': lambda: display._print_list(
                     bd.select(
                         display.request_details(['city_origin', 'state_origin', 'city_destination', 'state_destination']), self.tables['lifts']
@@ -115,7 +127,7 @@ class System(object):
 
             STATE_AUTHED: {
                 'Descadastrar': self.do_unregister,
-                'Mostrar caronas': lambda: display._print_list(self.tables['lifts'], 'Caronas disponíveis:'),
+                'Mostrar caronas': lambda: display._print_list(self.tables['lifts'], 'Caronas registradas:'),
                 'Pesquisar carona': lambda: display._print_list(
                     bd.select(
                         display.request_details(['city_origin', 'state_origin', 'city_destination', 'state_destination']), self.tables['lifts']
@@ -124,7 +136,7 @@ class System(object):
                 ),
                 'Registrar carona': self.do_add_lift,
                 'Retirar carona': self.do_remove_lift,
-                'Registrar reserva': lambda: print('@RegistrarReserva'),
+                'Registrar reserva': self.do_register_reservation,
                 'Retirar reserva': lambda: print('@RetirarReserva'),
             },
         

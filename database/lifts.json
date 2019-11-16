@@ -1,14 +1,14 @@
 [
     {
-        "city_destination": "RJ",
-        "date": "2019-11-15 17:13:48.942927",
-        "vacancies": 4,
+        "price": 159.9,
         "lift_code": 1,
         "user_cpf": "admin",
-        "state_destination": "RJ",
-        "duration": 60,
+        "city_destination": "RJ",
         "city_origin": "BSB",
+        "date": "2019-11-15 23:54:01.421070",
+        "vacancies": 4,
+        "duration": 60,
         "state_origin": "DF",
-        "price": 159.9
+        "state_destination": "RJ"
     }
 ]

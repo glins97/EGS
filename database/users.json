@@ -1,18 +1,18 @@
 [
     {
-        "email": "gabriel.lins97@gmail.com",
         "name": "Gabriel",
         "access_level": "admin",
         "user_cpf": "admin",
         "password": "",
-        "telephone": "(61) 99964-0993"
+        "telephone": "(61) 99964-0993",
+        "email": "gabriel.lins97@gmail.com"
     },
     {
-        "email": "",
         "name": "Luisa",
         "access_level": "user",
         "user_cpf": "user",
         "password": "",
-        "telephone": "(61) 99964-0993"
+        "telephone": "(61) 99964-0993",
+        "email": ""
     }
 ]
