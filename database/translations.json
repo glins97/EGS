@@ -1,0 +1,17 @@
+{
+    "user_cpf": "CPF do Usuário",
+    "reservation_code": "Código da Reserva",
+    "seat": "Assento",
+    "bagage": "Bagagem",
+    "agency": "Agência",
+    "bank": "Banco",
+    "number": "Número da Conta",
+    "price": "Preço",
+    "city_destination": "Cidade de Destino",
+    "city_origin": "Cidade de Origem",
+    "state_destination": "Estado de Destino",
+    "state_origin": "Estado de Origem",
+    "duration": "Duração do Translado",
+    "vacancies": "Vagas",
+    "date": "Data"
+}

@@ -1,7 +1,10 @@
+from src.system import bd
+translations = bd.load('translations')
+
 def request_details(attrs):
     response = {}
     for attr in attrs:
-        response[attr] = input('Valor para {}: '.format(attr))
+        response[attr] = input('Valor para {}: '.format(translations[attr]))
     return response
 
 def process_menu_choice(menu):
