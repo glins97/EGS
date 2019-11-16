@@ -3,6 +3,7 @@ from src.common.account import Account
 from src.common.user import User
 from src.common.lift import Lift
 from src.common.reservation import Reservation
+import datetime
 import time
 import os
 
@@ -69,11 +70,23 @@ class System(object):
                 'state_destination',
                 'duration',
                 'vacancies',
-                'price',            
+                'price',   
+                'day',         
+                'month',         
+                'year',         
+                'hour',         
+                'minute'         
             ])
         details['price'] = float(details['price'])
         details['vacancies'] = int(details['vacancies'])
         details['duration'] = int(details['duration'])
+        details['date'] = datetime.datetime(
+            day=int(details['day']),
+            monthr=int(details['month']),
+            year=int(details['year']),
+            hour=int(details['hour']),
+            minutes=int(details['minute'])
+        )
         details[Lift.pks[0]] = self.tables['lifts'][-1][Lift.pks[0]] + 1
         
         bd.append(

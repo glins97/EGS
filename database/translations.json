@@ -13,5 +13,10 @@
     "state_origin": "Estado de Origem",
     "duration": "Duração do Translado",
     "vacancies": "Vagas",
-    "date": "Data"
+    "date": "Data",
+    "day": "Dia",
+    "month": "Mes",
+    "year": "Ano",
+    "hour": "Hora",
+    "minute": "Minuto"
 }
