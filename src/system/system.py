@@ -111,6 +111,13 @@ class System(object):
         
         bd.append(details, self.tables['reservations'], 'reservations')
 
+    def do_unregister_reservation(self):
+        user_reservations = bd.select({'user_cpf': self.authed_user}, self.tables['reservations'])
+        reservation_index = display.request_choice(user_reservations, title='Escolha uma reserva para desregistrar:')
+
+        self.tables['reservations'].remove(user_reservations[reservation_index - 1])
+        bd.commit(self.tables['reservations'], 'reservations')
+
     def request_state_menu(self):
         menus = {
             STATE_NOT_AUTHED: {
@@ -137,7 +144,7 @@ class System(object):
                 'Registrar carona': self.do_add_lift,
                 'Retirar carona': self.do_remove_lift,
                 'Registrar reserva': self.do_register_reservation,
-                'Retirar reserva': lambda: print('@RetirarReserva'),
+                'Retirar reserva': self.do_unregister_reservation,
             },
         
         }
